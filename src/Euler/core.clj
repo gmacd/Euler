@@ -65,11 +65,7 @@
 
 
 (defn num-digits [a]
-  (loop [count 0
-         a a]
-    (if (zero? a)
-      count
-      (recur (inc count) (int (/ a 10))))))
+  (count (take-while #(> % 0) (iterate #(int (/ % 10.0)) a))))
 
 (defn digit-at [a digit-idx]
   (let [num-digits (num-digits a)
@@ -77,13 +73,16 @@
 	  (mod (int (/ a multiple-of-10)) 10)))
 
 (defn palindrome? [a]
-  (let [num-digits (num-digits a)]
-  	(loop [idx1 1
-           idx2 num-digits]
-      (if (>= idx1 idx2)
-        true
-        (let [d1 (digit-at a idx1)
-              d2 (digit-at a idx2)]
-          (if (not= d1 d2)
-            false
-            (recur (inc idx1) (dec idx2))))))))
+  (let [digits (for [idx (range 1 (+ 1 (num-digits a)))]
+                 (digit-at a idx))]
+    (= digits (reverse digits))))
+
+(defn e4 []
+  (apply max
+         (for [a (range 999 99 -1)
+               b (range (+ a 1) 99 -1)
+               :let [c (* a b)]
+               :when (palindrome? c)]
+           c)))
+
+
