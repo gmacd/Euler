@@ -86,3 +86,15 @@
            c)))
 
 
+(defn sum-of-squares [limit]
+  "Sum of squares from 1 to limit (inclusive)"
+	(reduce
+   +
+   (map #(int (Math/pow % 2)) (range 1 (inc limit)))))
+
+(defn square-of-sum [limit]
+  "Square of sum of numbers from 1 to limit (inclusive)"
+  (int (Math/pow (reduce + (range 1 (inc limit))) 2)))
+
+(defn e6 [limit]
+  (- (square-of-sum limit) (sum-of-squares limit)))
