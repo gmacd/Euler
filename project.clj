@@ -1,3 +1,8 @@
 (defproject Euler "1.0.0-SNAPSHOT"
   :description "FIXME: write description"
-  :dependencies [[org.clojure/clojure "1.4.0"]])
+  :dependencies [[org.clojure/clojure "1.5.0-RC1"]]
+  :repl-options
+  {
+    :init (do (set! *print-length* 103)
+              (set! *print-level* 15))
+  })
