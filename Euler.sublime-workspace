@@ -1,0 +1,1035 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"boolean",
+				"boolean-array"
+			],
+			[
+				"key",
+				"keyBasicStates"
+			],
+			[
+				"ini",
+				"initialState"
+			],
+			[
+				"create",
+				"createState"
+			],
+			[
+				"uo",
+				"updateForNewFrame"
+			],
+			[
+				"comp",
+				"componentsMap"
+			],
+			[
+				"compo",
+				"componentsMap"
+			],
+			[
+				"com",
+				"componentMap"
+			],
+			[
+				"en",
+				"entityList"
+			],
+			[
+				"upda",
+				"updated-comps"
+			],
+			[
+				"ent",
+				"entity"
+			],
+			[
+				"entit",
+				"entities-map"
+			],
+			[
+				"te",
+				"textureFilename"
+			],
+			[
+				"Temp",
+				"TempTexture2D"
+			],
+			[
+				"pro",
+				"projectionMatrixLoc"
+			],
+			[
+				"create-",
+				"create-slick-color-from-awt"
+			],
+			[
+				"inver",
+				"inverseViewMatrix"
+			],
+			[
+				"setup",
+				"setup-matrices"
+			],
+			[
+				"GL_TEXTURE",
+				"GL_TEXTURE_2D"
+			],
+			[
+				"crea",
+				"createFloatBuffer"
+			],
+			[
+				"load-",
+				"load-and-bind-png"
+			],
+			[
+				"shader",
+				"shaderProgramId"
+			],
+			[
+				"err",
+				"errchk"
+			],
+			[
+				"sha",
+				"shaderProgramId"
+			],
+			[
+				"wi",
+				"withProfileCore"
+			],
+			[
+				"vert",
+				"vertices"
+			],
+			[
+				"ver",
+				"verticesBuffer"
+			],
+			[
+				"with",
+				"withForwardCompatible"
+			],
+			[
+				"pas",
+				"parseFaceVert"
+			],
+			[
+				"m",
+				"modifiable"
+			],
+			[
+				"order",
+				"orderRepo	 ν"
+			],
+			[
+				"ran",
+				"rand	 package ρ"
+			],
+			[
+				"pr",
+				"Printf	n int, err error ƒ"
+			],
+			[
+				"s",
+				"String	string ƒ"
+			],
+			[
+				"ty",
+				"TypeOf	reflect.Type ƒ"
+			],
+			[
+				"func",
+				"func (*Order)	func (...) {...} ʂ"
+			],
+			[
+				"rand",
+				"randomInstrument	*core.Instrument ƒ"
+			],
+			[
+				"inn",
+				"Intn	int ƒ"
+			],
+			[
+				"instr",
+				"instrumentRepo	 ν"
+			],
+			[
+				"in",
+				"instrumentRepo	 ν"
+			],
+			[
+				"pt",
+				"Println	n int, err error ƒ"
+			],
+			[
+				"mi",
+				"Millisecond	 Ɩ"
+			],
+			[
+				"sl",
+				"Sleep	 ƒ"
+			],
+			[
+				"main",
+				"func main	func main {...} ʂ"
+			],
+			[
+				"re",
+				"ReadFile	[]byte, error ƒ"
+			],
+			[
+				"Intru",
+				"InstrumentRepo	struct ʈ"
+			],
+			[
+				"find",
+				"findAttr	string, bool ƒ"
+			],
+			[
+				"print",
+				"Println	n int, err error ƒ"
+			],
+			[
+				"td",
+				"tbody	*html.Node ν"
+			],
+			[
+				"tok",
+				"TokenType	uint32 ʈ"
+			],
+			[
+				"imp",
+				"import	import (...) ʂ"
+			],
+			[
+				"p",
+				"package main	package main ʂ"
+			],
+			[
+				"prin",
+				"Println	n int, err error ƒ"
+			],
+			[
+				"cu",
+				"cubeColours	[]gl.Float ν"
+			],
+			[
+				"Print",
+				"Println	n int, err error ƒ"
+			],
+			[
+				"wri",
+				"WriteString	n int, err error ƒ"
+			],
+			[
+				"wr",
+				"WriteString	n int, err error ƒ"
+			],
+			[
+				"iou",
+				"ioutil	 package ρ"
+			],
+			[
+				"gam",
+				"gameObject"
+			],
+			[
+				"gameOb",
+				"gameObjects"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"contents": "(ns Euler.core)\n\n(defn multiple? [a b]\n  \"Is b a multiple of a?\"\n  (= 0 (rem a b)))\n\n(defn multiple-of-any? [a bs]\n  \"Are any of bs a multiple of a?\"\n  (some #(multiple? a %) bs))\n\n(defn multiples-in-range [xs limit]\n  \"Return a lazy seq of all the multiples of any of xs between 1 and limit-1\"\n  (filter #(multiple-of-any? % xs) (range limit)))\n\n(defn e1 [xs limit]\n  \"Return sum of all multiples of xs between 1 and limit-1\"\n  (reduce + (multiples-in-range xs limit)))\n\n\n\n\n(defn fib []\n  \"Lazy fib seq\"\n  (map first (iterate (fn [[a b]] [b (+ a b)]) [0N 1N])))\n\n(defn sum-of-fibs [limit]\n  \"Return sum of even fibs <= 4,000,000\"\n  (reduce + (filter even? (for [x (fib) :while (< x (+ limit 2))] x))))\n\n(def e2 (sum-of-fibs 4000000))\n\n\n\n; Euclid's algorithm\n(defn gcd [a b]\n  (if (zero? b)\n    a\n    (recur b (mod a b))))\n\n(defn factor? [a pos-factor]\n  (zero? (rem a pos-factor)))\n\n(defn prime? [n]\n  (cond\n   	(<= n 1) false\n    (<= n 3) true\n    (= (mod n 2) 0) false\n    (= (mod n 3) 0) false\n    :else\n      (let [limit (Math/floor (Math/sqrt n))]\n     		(loop [pos-factor 5]\n          (cond\n            (>= pos-factor limit) true\n            (= 0 (mod n pos-factor)) false\n            (= 0 (mod n (+ pos-factor 2))) false\n            :else (recur (+ pos-factor 6)))))))\n\n(defn largest-prime-factor [a]\n  (loop [pos-factor (int (Math/ceil (Math/sqrt a)))]\n    (if (<= pos-factor 1)\n      0\n      (if (and (factor? a pos-factor) (prime2? pos-factor))\n        pos-factor\n        (recur (dec pos-factor))))))\n\n(def e3 (largest-prime-factor 600851475143))\n\n\n\n(defn num-digits [a]\n  (count (take-while #(> % 0) (iterate #(int (/ % 10.0)) a))))\n\n(defn digit-at [a digit-idx]\n  (let [num-digits (num-digits a)\n        multiple-of-10 (int (Math/pow 10 (- num-digits digit-idx)))]\n	  (mod (int (/ a multiple-of-10)) 10)))\n\n(defn palindrome? [a]\n  (let [digits (for [idx (range 1 (+ 1 (num-digits a)))]\n                 (digit-at a idx))]\n    (= digits (reverse digits))))\n\n(defn e4 []\n  (apply max\n         (for [a (range 999 99 -1)\n               b (range (+ a 1) 99 -1)\n               :let [c (* a b)]\n               :when (palindrome? c)]\n           c)))\n\n\n(defn sum-of-squares [limit]\n  \"Sum of squares from 1 to limit (inclusive)\"\n	(reduce\n   +\n   (map #(int (Math/pow % 2)) (range 1 (inc limit)))))\n\n(defn square-of-sum [limit]\n  \"Square of sum of numbers from 1 to limit (inclusive)\"\n  (int (Math/pow (reduce + (range 1 (inc limit))) 2)))\n\n(defn e6 [limit]\n  (- (square-of-sum limit) (sum-of-squares limit)))\n\n\n; e7\n; Hacky mess of magic numbers based on code here:\n; http://clojuredocs.org/clojure_core/clojure.core/reduce\n(nth (reduce\n (fn [primes number]\n   (if (some zero? (map (partial mod number) primes))\n     primes\n     (conj primes number)))\n [2] (take 60000 (iterate #(+ 2 %) 3))) 10000)\n\n\n(defn split-number [a]\n	(reduce conj []\n  	      (for [n (range 1 (inc (num-digits a)))\n    	          :let [digit (digit-at a n)]]\n      	    digit)))\n\n\n\n(defn e8 [s]\n  (let [nums (map #(Character/digit % 10) (seq s))]\n	  (apply max (for [group (partition 5 1 nums)\n  	                 :let [sum (apply * group)]]\n    	           sum))))\n\n(e8 \"7316717653133062491922511967442657474235534919493496983520312774506326239578318016984801869478851843858615607891129494954595017379583319528532088055111254069874715852386305071569329096329522744304355766896648950445244523161731856403098711121722383113622298934233803081353362766142828064444866452387493035890729629049156044077239071381051585930796086670172427121883998797908792274921901699720888093776657273330010533678812202354218097512545405947522435258490771167055601360483958644670632441572215539753697817977846174064955149290862569321978468622482839722413756570560574902614079729686524145351004748216637048440319989000889524345065854122758866688116427171479924442928230863465674813919123162824586178664583591245665294765456828489128831426076900422421902267105562632111110937054421750694165896040807198403850962455444362981230987879927244284909188845801561660979191338754992005240636899125607176060588611646710940507754100225698315520005593572972571636269561882670428252483600823257530420752963450\")\n\n\n\n; e9\n(def pows\n  (into-array\n    (for [i (range 0 1001)\n          :let [p (int (Math/pow i 2))]] p)))\n\n(def set1\n  (into-array\n    (for [a (range 1 1001)\n          b (range (inc a) 1001)\n          c (range (inc b) 1001)\n          :when (= 1000 (+ a b c))]\n      [(nth pows a) (nth pows b) (nth pows c)])))\n\n(def set1sq\n  (first (filter #(= (+ (nth % 0) (nth % 1)) (nth % 2)) set1)))\n\n(def triplet (map #(int (Math/sqrt %)) set1sq))\n(def soln (reduce * triplet))\n\n; Combined version\n(defn e9 []\n  (let [set1 (for [a (range 1 1001)\n                    b (range (inc a) 1001)\n                    c (range (inc b) 1001)\n                    :when (= 1000 (+ a b c))]\n                [(Math/pow a 2) (Math/pow b 2) (Math/pow c 2)])\n        set1sq (first (filter #(= (+ (nth % 0) (nth % 1)) (nth % 2)) set1))\n        triplet (map #(int (Math/sqrt %)) set1sq)]\n    (reduce * triplet)))\n\n(def alglim 1001)\n\n\n; e10\n(defn primes\n  \"Lazy prime number generator\"\n  ([] (concat [2 3] (primes [2 3])))\n  ([prev-primes]\n    (loop [n (+ 2 (last prev-primes))]\n      (if (some zero? (map (partial mod n) prev-primes))\n        (recur (inc n))\n        (cons n (lazy-seq (primes (conj prev-primes n))))))))\n\n(defn test-int [idx item] (not= (rem (+ 2 idx) 2) 0))\n(defn mark-non-primes [primes n]\n  (map-indexed (fn [idx item] (not= (rem (+ 2 idx) n))) primes))\n\n(defn seive-primes [limit]\n  (loop [primes (boolean-array limit true)\n         n 2]\n    (recur [(mark-non-primes primes n) (inc n)])))\n",
+			"file": "src/Euler/core.clj",
+			"file_size": 5616,
+			"file_write_time": 1356512087000000,
+			"settings":
+			{
+				"buffer_size": 5631,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "> a\na\n(true true true true true true true true true)\nuser=> (mark-non-primes a 2)\n(mark-non-primes a 2)\nArityException Wrong number of args (0) passed to: user$test-int  clojure.lang.AFn.throwArity (AFn.java:437)\n\nuser=> (defn mark-non-primes [a b] (map-indexed (test-int) a))\n(defn mark-non-primes [a b] (map-indexed (test-int) a))\n#'user/mark-non-primes\nuser=> (defn mark-non-primes [a b] (map-indexed test-int a))\n(defn mark-non-primes [a b] (map-indexed test-int a))\n#'user/mark-non-primes\nuser=> (mark-non-primes a 2)\n(mark-non-primes a 2)\n(false true false true false true false true false)\nuser=> (defn mark-non-primes [primes n]\n  #_=>   (map-indexed (fn [idx item] (not= (rem (+ 2 idx) n))) primes))\n#'user/mark-non-primes\nuser=> (mark-non-primes a 2)\n(mark-non-primes a 2)\n(false false false false false false false false false)\nuser=> (defn mark-non-primes [a b] (map-indexed test-int a))",
+			"settings":
+			{
+				"buffer_size": 899,
+				"line_ending": "Unix",
+				"name": "*REPL* [clojure]",
+				"scratch": true
+			}
+		}
+	],
+	"build_system": "Packages/JSHint/JSHint.sublime-build",
+	"command_palette":
+	{
+		"height": 47.0,
+		"selected_items":
+		[
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"spaces",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"conv",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"spACEs",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"package",
+				"Package Control: Remove Package"
+			],
+			[
+				"jsh",
+				"JSHint: Linter"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"jshi",
+				"JSHint"
+			],
+			[
+				"jshint",
+				"JSHint"
+			],
+			[
+				"hint",
+				"JSHint"
+			],
+			[
+				"javascript",
+				"Set Syntax: JavaScriptNext"
+			],
+			[
+				"snipp",
+				"Snippet: html"
+			],
+			[
+				"Snippet: html",
+				"Snippet: html"
+			],
+			[
+				"html",
+				"Set Syntax: HTML5"
+			],
+			[
+				"list",
+				"Package Control: List Packages"
+			],
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
+				"repl",
+				"SublimeREPL: Clojure"
+			],
+			[
+				"upgr",
+				"Package Control: Upgrade/Overwrite All Packages"
+			],
+			[
+				"brack",
+				"Bracket Highlighter: Match Brackets"
+			],
+			[
+				"indent",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"upgrade",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"doc",
+				"Goto Documentation"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"Snippet: ",
+				"Snippet: #!/usr/bin/env"
+			],
+			[
+				"install pack",
+				"Package Control: Install Package"
+			],
+			[
+				"gosub pa",
+				"GoSublime: Add/Remove package"
+			],
+			[
+				"gosub",
+				"GoSublime: Show call tip"
+			],
+			[
+				"sublime",
+				"GoSublime: Show call tip"
+			],
+			[
+				"upda",
+				"Package Control: Upgrade/Overwrite All Packages"
+			],
+			[
+				"gosub ",
+				"GoSublime: Add/Remove package"
+			],
+			[
+				"gosub imp",
+				"GoSublime: Install/Update MarGo and Gocode"
+			],
+			[
+				"packa",
+				"GoSublime: Add/Remove package"
+			],
+			[
+				"sub err",
+				"GoSublime: Show errors"
+			],
+			[
+				"gosub call",
+				"GoSublime: Show call tip"
+			],
+			[
+				"gosub err",
+				"GoSublime: Show errors"
+			],
+			[
+				"gosublime",
+				"GoSublime: Install/Update MarGo and Gocode"
+			]
+		],
+		"width": 494.0
+	},
+	"console":
+	{
+		"height": 125.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": true,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/graham/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/Users/graham/Documents/Code/github/Euler/project.clj",
+		"/Users/graham/Documents/Code/github/three.js/src/cameras/Camera.js",
+		"/Users/graham/Documents/Code/bitbucket/geo/js/components.js",
+		"/Users/graham/Documents/Code/bitbucket/geo/js/input.js",
+		"/Users/graham/Documents/Code/bitbucket/geo/.jshintrc",
+		"/Users/graham/Documents/Code/bitbucket/geo/js/scene.js",
+		"/Users/graham/Documents/Code/bitbucket/geo/js/ui.js",
+		"/Users/graham/Documents/Code/bitbucket/geo/js/three_extensions.js",
+		"/Users/graham/Documents/Code/bitbucket/geo/html/index.html",
+		"/Users/graham/Documents/Code/bitbucket/geo/features.txt",
+		"/Users/graham/Documents/Code/bitbucket/geo/js/main.js",
+		"/Users/graham/Documents/Code/github/three.js/build/three.js",
+		"/Users/graham/Documents/Code/bitbucket/geo/js/physics.js",
+		"/Users/graham/Library/Application Support/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/Users/graham/Library/Application Support/Sublime Text 2/Packages/User/JavaScript.sublime-settings",
+		"/Users/graham/Library/Application Support/Sublime Text 2/Packages/SublimeOnSaveBuild/README.md",
+		"/Users/graham/Library/Application Support/Sublime Text 2/Packages/SublimeOnSaveBuild/SublimeOnSaveBuild.sublime-settings",
+		"/Users/graham/Downloads/IntegrationBasics/Integration.cpp",
+		"/Users/graham/Documents/Code/bitbucket/geo/todo.txt",
+		"/Users/graham/Documents/Code/bitbucket/geo/js/entity.js",
+		"/Users/graham/Documents/Code/bitbucket/geo/js/utils.js",
+		"/Users/graham/Documents/Code/bitbucket/geo/css/index.css",
+		"/Users/graham/Documents/Code/bitbucket/geo/js/third/es6-shim.js",
+		"/Users/graham/Documents/Code/bitbucket/geo/js/test.js",
+		"/Users/graham/Documents/Code/bitbucket/geo/js/third/three.min.js",
+		"/Users/graham/Documents/Code/bitbucket/geo/js/third/jquery-1.8.3.min.js",
+		"/Users/graham/Documents/Code/bitbucket/geomono/geo/Petjack/Game.cs",
+		"/Users/graham/Documents/Code/bitbucket/geomono/geo/Petjack/Main.cs",
+		"/Users/graham/Documents/Code/bitbucket/geomono/geo/Petjack/Info.plist",
+		"/Users/graham/Documents/Code/bitbucket/geomono/geo/Petjack/Properties/AssemblyInfo.cs",
+		"/Users/graham/Documents/Code/bitbucket/geomono/geo/Petjack/Geo.Petjack.csproj",
+		"/Users/graham/Documents/Code/bitbucket/geomono/geo/Petjack/Components/GameComponents.cs",
+		"/Users/graham/Documents/Code/bitbucket/geomono/geo/Petjack/Components/DamagePlayer.cs",
+		"/Users/graham/Documents/Code/bitbucket/geomono/geo/Geomono/Geo.Geomono.csproj",
+		"/Users/graham/Documents/Code/bitbucket/geomono/geo/Geomono.sln",
+		"/Users/graham/Documents/Code/bitbucket/geomono/geo/Petjack/Velo.Petjack.csproj",
+		"/Users/graham/Documents/Code/bitbucket/geomono/geo/Geomono.userprefs",
+		"/Users/graham/Documents/Code/bitbucket/geomono/geo/Geomono/Geomono.csproj",
+		"/Users/graham/Documents/Code/bitbucket/geomono/Geomono/Geomono/Geomono.csproj",
+		"/Users/graham/Documents/Code/github/MonoGame/Samples/Colored3DCube/Colored3DCube.MacOS.csproj",
+		"/Users/graham/Library/Application Support/Sublime Text 2/Packages/User/xbuild.sublime-build",
+		"/Users/graham/Documents/Code/github/MonoGame/Samples/Colored3DCube/Program.cs",
+		"/Users/graham/Documents/Code/bitbucket/geospace/src/geo/entity/component.clj",
+		"/Users/graham/Documents/Code/bitbucket/geospace/src/geo/utils.clj",
+		"/Users/graham/Documents/Code/bitbucket/geospace/project.clj",
+		"/Users/graham/Documents/Code/bitbucket/geospace/geospace.sublime-project",
+		"/Users/graham/Documents/Code/bitbucket/geospace/src/geo/gfx/gfx.clj",
+		"/Users/graham/Documents/Code/github/NinthPlanet/project.clj",
+		"/Users/graham/Documents/Code/github/Euler/src/Euler/core.clj",
+		"/Users/graham/Documents/Code/github/NinthPlanet/src/geo/entity/components/core.clj",
+		"/Users/graham/Documents/Code/github/NinthPlanet/src/geo/entity/component.clj",
+		"/Users/graham/Documents/Code/github/NinthPlanet/src/geo/entity/entity.clj",
+		"/Users/graham/Documents/Code/github/NinthPlanet/src/geo/app.clj",
+		"/Users/graham/Documents/Code/github/NinthPlanet/src/geo/testapps/single/quadtexturewithtransform.clj",
+		"/Users/graham/Documents/Code/github/NinthPlanet/src/geo/maths/matrix.clj",
+		"/Users/graham/Documents/Code/github/NinthPlanet/src/geo/gfx/gfx.clj",
+		"/Users/graham/Documents/Code/github/NinthPlanet/src/geo/gfx/sprite.clj",
+		"/Users/graham/Documents/Code/github/NinthPlanet/src/geo/entity/core-components.clj",
+		"/Users/graham/Documents/Code/github/NinthPlanet/src/geo/gfx/test.clj",
+		"/Users/graham/Documents/Code/github/NinthPlanet/src/geo/shapes.clj",
+		"/Users/graham/Documents/Code/github/NinthPlanet/src/geo/maths/maths.clj",
+		"/Users/graham/Documents/Code/github/NinthPlanet/src/geo/scene.clj",
+		"/Users/graham/Documents/Code/github/NinthPlanet/src/geo/testapps/polys.clj",
+		"/Users/graham/Documents/Code/github/NinthPlanet/src/geo/gfx.clj",
+		"/Users/graham/Documents/Code/github/NinthPlanet/resources/shaders/sprite-fragment.glsl",
+		"/Users/graham/Documents/Code/github/NinthPlanet/resources/shaders/sprite-vertex.glsl",
+		"/Users/graham/Documents/Code/github/lwjgl/build.xml",
+		"/Users/graham/Documents/Code/github/NinthPlanet/src/geo/testapps/single/quadtexturewithtransform3d.clj",
+		"/Users/graham/Library/Application Support/Sublime Text 2/Packages/Makefile/Make.sublime-build",
+		"/Users/graham/Library/Application Support/Sublime Text 2/Packages/User/Leiningen.sublime-build",
+		"/Users/graham/bin/lein-build.sh",
+		"/Users/graham/.lein/leinrc",
+		"/Users/graham/Documents/Code/github/NinthPlanet/src/geo/geom.clj",
+		"/Users/graham/Desktop/texturedquad.java",
+		"/Users/graham/Documents/Code/github/NinthPlanet/src/geo/core.clj",
+		"/Users/graham/Documents/Code/github/lwjgl/src/java/org/lwjgl/opengl/ContextAttribs.java",
+		"/Users/graham/Documents/Code/github/lwjgl/src/java/org/lwjgl/opengl/PixelFormatLWJGL.java",
+		"/Users/graham/Documents/Code/github/lwjgl/src/java/org/lwjgl/opengl/PixelFormat.java",
+		"/Users/graham/Documents/Code/github/lwjgl/src/java/org/lwjgl/opengl/Context.java",
+		"/Users/graham/Library/Application Support/Sublime Text 2/Packages/BracketHighlighter/Default (OSX).sublime-keymap",
+		"/Users/graham/Library/Application Support/Sublime Text 2/Packages/User/BracketHighlighter.sublime-settings",
+		"/Users/graham/Library/Application Support/Sublime Text 2/Packages/BracketHighlighter/BracketHighlighter.sublime-settings",
+		"/Users/graham/Documents/Code/github/NinthPlanet/src/geo/testapps/single/quadtexture.clj",
+		"/Users/graham/Documents/Code/github/NinthPlanet/src/geo/testapps/single/quadimmediate.clj",
+		"/Users/graham/Documents/Code/github/NinthPlanet/src/geo/testapps/single/quaddrawarrays.clj",
+		"/Users/graham/Documents/Code/github/NinthPlanet/resources/fragment.glsl",
+		"/Users/graham/Documents/eclipseworkspace-clojure/lwjglvbo/src/textured-shaders/fragment.glsl",
+		"/Users/graham/Documents/eclipseworkspace-clojure/lwjglvbo/src/textured-shaders/vertex.glsl",
+		"/Users/graham/Documents/eclipseworkspace-clojure/lwjglvbo/src/thequad/fragment.glsl",
+		"/Users/graham/Documents/eclipseworkspace-clojure/lwjglvbo/src/thequad/vertex.glsl",
+		"/Users/graham/Documents/Code/github/NinthPlanet/resources/vertex.glsl",
+		"/Users/graham/Documents/Code/github/NinthPlanet/.gitignore",
+		"/Users/graham/Documents/Code/github/NinthPlanet/NinthPlanet.sublime-project",
+		"/Users/graham/Documents/Code/Velo/clojure/clojure.sublime-project",
+		"/Users/graham/Documents/Code/github/NinthPlanet/NinthPlanet",
+		"/Users/graham/Documents/Code/Velo/clojure/geo/src/geo/testapps/polys.clj",
+		"/Users/graham/Documents/Code/Velo/clojure/geo/resources/vertex.glsl",
+		"/Users/graham/Documents/Code/Velo/clojure/geo/src/geo/testapps/single/quaddrawarrays.clj",
+		"/Users/graham/Documents/Code/Velo/clojure/geo/src/geo/testapps/single/quadimmediate.clj",
+		"/Users/graham/Documents/Code/Velo/clojure/geo/src/geo/testapps/quaddrawarrays.clj",
+		"/Users/graham/Documents/eclipseworkspace-clojure/lwjglvbo/src/TheQuadExampleColored.java",
+		"/Users/graham/Documents/Code/Velo/clojure/geo/src/geo/testapps/quadimmediate.clj",
+		"/Users/graham/Documents/Code/Velo/clojure/geo/test/geo/geom_test.clj",
+		"/Users/graham/Documents/Code/Velo/clojure/geo/test/geo/universe_test.clj",
+		"/Users/graham/Documents/Code/Velo/clojure/geo/src/geo/universe.clj",
+		"/Users/graham/Documents/Code/Velo/clojure/geo/src/geo/shapes.clj",
+		"/Users/graham/Documents/Code/Velo/clojure/geo/src/geo/old_core.clj",
+		"/Users/graham/Documents/Code/Velo/clojure/geo/project.clj",
+		"/Users/graham/Documents/Code/Velo/clojure/geo-jogl/project.clj",
+		"/Users/graham/Documents/Code/Velo/clojure/geo/test/geo/core_test.clj",
+		"/Users/graham/Documents/Code/Velo/clojure/geo/src/geo/geom.clj",
+		"/Users/graham/Documents/Code/Velo/clojure/geo/test/geo/universe.clj",
+		"/Users/graham/Library/Application Support/Sublime Text 2/Packages/SublimeREPL/SublimeREPL.sublime-settings",
+		"/Users/graham/Documents/Code/Velo/clojure/geo/.classpath",
+		"/Users/graham/Documents/Code/Velo/clojure/geo/test/geospace/core_test.clj",
+		"/Users/graham/Documents/Code/Velo/clojure/geo/test/geospace/geom_test.clj",
+		"/Users/graham/Documents/Code/Velo/clojure/geo/src/geo/gfx.clj",
+		"/Users/graham/Documents/Code/Velo/clojure/geo/src/geo/scene.clj",
+		"/Users/graham/Documents/Code/Velo/clojure/geo/src/geo/utils.clj",
+		"/Users/graham/Documents/Code/Velo/clojure/geospace/src/geospace/core.clj",
+		"/Users/graham/Documents/Code/Velo/clojure/geospace/src/geospace/scene.clj",
+		"/Users/graham/Documents/Code/Velo/clojure/geospace/src/geospace/gfx.clj",
+		"/Users/graham/Documents/Code/Velo/clojure/geo/src/geo/apps/quadvbo.clj",
+		"/Users/graham/Documents/Code/Velo/clojure/geo/src/geo/apps/quadimmediate.clj",
+		"/Users/graham/Documents/Code/Velo/clojure/geo/src/geo/core.clj",
+		"/Users/graham/Documents/Code/Velo/clojure/geospace/src/geospace/geom.clj",
+		"/Users/graham/Documents/Code/Velo/clojure/geospace/project.clj"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			"/Users/graham/Documents/Code/bitbucket/geo",
+			"*.clj",
+			"/Users/graham/Documents/Code/Velo,*.clj",
+			"/Users/graham/Documents/Code/Velo;*.clj",
+			"/Users/graham/Documents/Code/Velo"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"ContentWidth600",
+			"Show Portrait",
+			"Show Pages Heading",
+			".p",
+			".ps",
+			"canvas",
+			"undefined",
+			"foreach",
+			"function",
+			"camera",
+			"addEntity",
+			"geo",
+			"monomac",
+			"jetpack",
+			"velo",
+			"monomac",
+			"sprite",
+			"gfx",
+			"component",
+			"entity",
+			"resource",
+			"assoc",
+			"load",
+			"load-matrix",
+			"texId",
+			"matrix",
+			"projectionMatrixLoc",
+			"ortho",
+			"5353",
+			"53",
+			"filein",
+			"prn",
+			"texture",
+			"cot",
+			"projectionMatrixLoc",
+			"load-shader",
+			"mutab",
+			"new PixelFormat",
+			"setup-matrices",
+			"projectionMatrixLoc",
+			"setup-matrices",
+			"matrix44Buffer",
+			"projectionMatrix",
+			":w",
+			"glu",
+			"setupMatrices",
+			"(def ",
+			"vaoId",
+			"shaderProgramId",
+			"vertices",
+			"verticesBuffer",
+			"load-and-bind-png",
+			"load-sh",
+			"texIds",
+			"setupTextures",
+			"glu",
+			"err",
+			"geospace",
+			"geo",
+			"array",
+			"0",
+			"verticesBuffer",
+			"hyph",
+			"geo",
+			"map",
+			"tab",
+			"cent",
+			"test",
+			"genvertexarr",
+			"begin",
+			"clear",
+			"test",
+			"routingKey",
+			"repl",
+			"queue",
+			"extractComponents",
+			"Attribute",
+			"Attr",
+			"textnode",
+			"token",
+			"parse",
+			"pointer",
+			"VertexPointer",
+			"pointer",
+			"point",
+			"GlFLoats",
+			"init",
+			"websocket",
+			"//",
+			"mag",
+			"enemy",
+			"simplephysics",
+			"player-standing",
+			"label",
+			"mapCells8x8",
+			"arial",
+			"label",
+			"\"text\"",
+			"text",
+			"font",
+			"audio",
+			"font",
+			"Mappie",
+			"Mappie.dll",
+			"Core.dll",
+			"game\""
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"extractComponents",
+			"default",
+			"",
+			"default"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "src/Euler/core.clj",
+					"settings":
+					{
+						"buffer_size": 5631,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5495,
+								5495
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Clojure/Clojure.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1946.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 1,
+					"settings":
+					{
+						"buffer_size": 899,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								899,
+								899
+							]
+						],
+						"settings":
+						{
+							"auto_complete": true,
+							"auto_indent": false,
+							"detect_indentation": false,
+							"gutter": false,
+							"history_arrows": true,
+							"indent_subsequent_lines": false,
+							"line_numbers": false,
+							"repl": true,
+							"repl_external_id": "clojure",
+							"repl_id": "2b667e31c58c4614a2a8ba3ec1d88b15",
+							"smart_indent": false,
+							"syntax": "Packages/Clojure/Clojure.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.5,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.GsComplete.completion-hint":
+	{
+		"height": 100.0
+	},
+	"output.GsComplete.completion-hint-output":
+	{
+		"height": 100.0
+	},
+	"output.GsDoc-output":
+	{
+		"height": 100.0
+	},
+	"output.GsDoc-output-output":
+	{
+		"height": 100.0
+	},
+	"output.exec":
+	{
+		"height": 270.0
+	},
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"scene",
+				"geo/js/scene.js"
+			],
+			[
+				"html",
+				"geo/html/index.html"
+			],
+			[
+				"input",
+				"geo/js/input.js"
+			],
+			[
+				"main",
+				"geo/js/main.js"
+			],
+			[
+				"three",
+				"three.js/build/three.js"
+			],
+			[
+				"to",
+				"geo/todo.txt"
+			],
+			[
+				"entit",
+				"geo/js/entity.js"
+			],
+			[
+				"feat",
+				"geo/features.txt"
+			],
+			[
+				"ui",
+				"geo/js/ui.js"
+			],
+			[
+				".txt",
+				"geo/features.txt"
+			],
+			[
+				"compo",
+				"geo/js/components.js"
+			],
+			[
+				"todo",
+				"geo/todo.txt"
+			],
+			[
+				"index",
+				"geo/html/index.html"
+			],
+			[
+				"index.css",
+				"geo/css/index.css"
+			],
+			[
+				"inde",
+				"geo/html/index.html"
+			],
+			[
+				".css",
+				"geo/css/index.css"
+			],
+			[
+				"compon",
+				"src/geo/entity/component.clj"
+			],
+			[
+				"util",
+				"src/geo/utils.clj"
+			],
+			[
+				"proje",
+				"NinthPlanet/project.clj"
+			],
+			[
+				"maths",
+				"NinthPlanet/src/geo/maths/maths.clj"
+			],
+			[
+				"matri",
+				"NinthPlanet/src/geo/maths/matrix.clj"
+			],
+			[
+				"math",
+				"NinthPlanet/src/geo/maths/matrix.clj"
+			],
+			[
+				"transform3d",
+				"NinthPlanet/src/geo/testapps/single/quadtexturewithtransform3d.clj"
+			],
+			[
+				"pro",
+				"NinthPlanet/project.clj"
+			],
+			[
+				"quadtran",
+				"NinthPlanet/src/geo/testapps/single/quadtexturewithtransform.clj"
+			],
+			[
+				"quadte",
+				"NinthPlanet/src/geo/testapps/single/quadtexture.clj"
+			],
+			[
+				"quadimm",
+				"NinthPlanet/src/geo/testapps/single/quadimmediate.clj"
+			],
+			[
+				"pol",
+				"NinthPlanet/src/geo/testapps/polys.clj"
+			],
+			[
+				"quad",
+				"NinthPlanet/src/geo/testapps/single/quaddrawarrays.clj"
+			],
+			[
+				"core",
+				"NinthPlanet/src/geo/core.clj"
+			],
+			[
+				"quaddr",
+				"clojure/geo/src/geo/testapps/single/quaddrawarrays.clj"
+			],
+			[
+				"glsl",
+				"clojure/geo/resources/fragment.glsl"
+			],
+			[
+				"gfx",
+				"clojure/geo/src/geo/gfx.clj"
+			],
+			[
+				"geom",
+				"geo/src/geo/geom.clj"
+			],
+			[
+				"quadvbo",
+				"geo/src/geo/apps/quadvbo.clj"
+			],
+			[
+				"scee",
+				"geospace/src/geospace/scene.clj"
+			],
+			[
+				"class",
+				"geospace/.classpath"
+			],
+			[
+				"proj",
+				"geospace/project.clj"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"show_minimap": false,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": false,
+	"side_bar_width": 268.0,
+	"status_bar_visible": true
+}
