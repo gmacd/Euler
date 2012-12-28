@@ -1,5 +1,29 @@
 (ns Euler.core)
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; General utilities
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+(defn indexed
+  "Returns a lazy sequence of [index, item] pairs, where items come
+  from 's' and indexes count up from zero.
+
+  (indexed '(a b c d))  =>  ([0 a] [1 b] [2 c] [3 d])"
+  [s]
+  (map vector (iterate inc 0) s))
+
+(defn positions
+  "Returns a lazy sequence containing the positions at which pred
+   is true for items in coll."
+  [pred coll]
+  (for [[idx elt] (indexed coll) :when (pred elt)] idx))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
 (defn multiple? [a b]
   "Is b a multiple of a?"
   (= 0 (rem a b)))
@@ -167,24 +191,6 @@
 
 
 ; e10
-(defn primes
-  "Lazy prime number generator"
-  ([] (concat [2 3] (primes [2 3])))
-  ([prev-primes]
-    (loop [n (+ 2 (last prev-primes))]
-      (if (some zero? (map (partial mod n) prev-primes))
-        (recur (inc n))
-        (cons n (lazy-seq (primes (conj prev-primes n))))))))
-
-(defn test-int [idx item] (not= (rem (+ 2 idx) 2) 0))
-(defn mark-non-primes [primes n]
-  (map-indexed (fn [idx item] (not= (rem (+ 2 idx) n))) primes))
-
-(defn seive-primes [limit]
-  (loop [primes (boolean-array limit true)
-         n 2]
-    (recur [(mark-non-primes primes n) (inc n)])))
-
 (defn array-or
   "Or each pair of items in seqs a and b"
   [a b]
@@ -213,3 +219,31 @@
   (map first (filter second (map-indexed vector (sieve-of-erastothenes-bools limit)))))
 
 (defn e10 [] (reduce + (sieve-of-erastothenes-ints 2000000)))
+
+
+
+(defn array-and
+  "And each pair of items in seqs a and b"
+  [a b]
+  (map #(and %1 %2) a b))
+
+(defn array-of-possible-primes [n limit]
+  (let [lowerBound (Math/pow n 2)]
+    (concat [false false]
+      (for [i (range 2 (inc limit))]
+        (if (< i lowerBound)
+          true
+          (not (zero? (rem i n))))))))
+
+(defn next-n [n coll]
+  (ffirst (filter second (drop (inc n) (map-indexed vector coll)))))
+
+
+(defn sieve-of-erastothenes-bools [limit]
+  (loop [n 2
+         bools (array-of-possible-primes n limit)]
+    (if (>= (Math/pow n 2) limit)
+      bools
+      (let [n2 (next-n n bools)]
+      	(recur n2
+               (array-and bools (array-of-possible-primes n2 limit)))))))
