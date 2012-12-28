@@ -176,11 +176,40 @@
         (recur (inc n))
         (cons n (lazy-seq (primes (conj prev-primes n))))))))
 
-(defn test-int [idx item] (not= (rem (+ 2 idx) item)))
+(defn test-int [idx item] (not= (rem (+ 2 idx) 2) 0))
 (defn mark-non-primes [primes n]
-  (map-indexed #(not= (rem (+ 2 %1) n)) primes))
+  (map-indexed (fn [idx item] (not= (rem (+ 2 idx) n))) primes))
 
 (defn seive-primes [limit]
   (loop [primes (boolean-array limit true)
          n 2]
     (recur [(mark-non-primes primes n) (inc n)])))
+
+(defn array-or
+  "Or each pair of items in seqs a and b"
+  [a b]
+  (map #(or %1 %2) a b))
+
+(defn array-and
+  "And each pair of items in seqs a and b"
+  [a b]
+  (map #(and %1 %2) a b))
+
+(defn array-of-possible-primes [n limit]
+  (let [lowerBound (Math/pow n 2)]
+    (concat [false false]
+      (for [i (range 2 (inc limit))]
+        (if (< i lowerBound)
+          true
+          (not (zero? (rem i n))))))))
+
+(defn sieve-of-erastothenes-bools [limit]
+  (reduce
+    array-and
+    (for [n (range 2 limit)]
+      (array-of-possible-primes n limit))))
+
+(defn sieve-of-erastothenes-ints [limit]
+  (map first (filter second (map-indexed vector (sieve-of-erastothenes-bools limit)))))
+
+(defn e10 [] (reduce + (sieve-of-erastothenes-ints 2000000)))
