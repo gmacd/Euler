@@ -1,2 +1,4 @@
 
 target/stale/dependencies
+
+*.sublime-workspace
