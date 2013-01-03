@@ -23,3 +23,36 @@
 01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48")
 
 (def nums (map #(Integer/parseInt %) (string/split raw-text #"\s+")))
+
+(def h (count (string/split raw-text #"\n")))
+(def w (/ (count nums) h))
+
+(def rows (partition 5 1 nums))
+
+(defn xythcol [x y coll w h]
+  (map #(nth coll (+ x (* w (+ y %))))
+       (range 0 5)))
+
+(defn xythdiagr [x y coll w h]
+  (map #(nth coll (+ x % (* w (+ y %))))
+       (range 0 5)))
+
+(defn xythdiagl [x y coll w h]
+  (map #(nth coll (+ x (- %) (* w (+ y %))))
+       (range 0 5)))
+
+(def cols (for [y (range 0 (- h 4))
+            	  x (range 0 w)]
+            (xythcol x y nums w h)))
+
+(def diagsl (for [y (range 0 (- h 4))
+             	    x (range 4 w)]
+            	(xythdiagl x y nums w h)))
+
+(def diagsr (for [y (range 0 (- h 4))
+             	    x (range 0 (- w 4))]
+            	(xythdiagr x y nums w h)))
+
+(defn e11 []
+  (apply max
+   (map (partial apply *) (concat rows cols diagsl diagsr))))
