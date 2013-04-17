@@ -27,31 +27,29 @@
 (def h (count (string/split raw-text #"\n")))
 (def w (/ (count nums) h))
 
-(def rows (partition 5 1 nums))
+(defn nth-seq [coll start-idx interval count]
+  (map #(nth coll (+ start-idx (* interval %)))
+    (range 0 count)))
 
-(defn xythcol [x y coll w h]
-  (map #(nth coll (+ x (* w (+ y %))))
-       (range 0 5)))
+(def rows (for [y (range 0 h)
+                x (range 0 (- w 3))
+                :let [idx (+ x (* y w))]]
+            (nth-seq nums idx 1 4)))
 
-(defn xythdiagr [x y coll w h]
-  (map #(nth coll (+ x % (* w (+ y %))))
-       (range 0 5)))
+(def cols (for [y (range 0 (- h 3))
+                x (range 0 w)
+                :let [idx (+ x (* y w))]]
+            (nth-seq nums idx w 4)))
 
-(defn xythdiagl [x y coll w h]
-  (map #(nth coll (+ x (- %) (* w (+ y %))))
-       (range 0 5)))
+(def diagsl (for [y (range 0 (- h 3))
+                  x (range 3 w)
+                  :let [idx (+ x (* y w))]]
+              (nth-seq nums idx (dec w) 4)))
 
-(def cols (for [y (range 0 (- h 4))
-            	  x (range 0 w)]
-            (xythcol x y nums w h)))
-
-(def diagsl (for [y (range 0 (- h 4))
-             	    x (range 4 w)]
-            	(xythdiagl x y nums w h)))
-
-(def diagsr (for [y (range 0 (- h 4))
-             	    x (range 0 (- w 4))]
-            	(xythdiagr x y nums w h)))
+(def diagsr (for [y (range 0 (- h 3))
+                  x (range 0 (- w 3))
+                  :let [idx (+ x (* y w))]]
+              (nth-seq nums idx (inc w) 4)))
 
 (defn e11 []
   (apply max

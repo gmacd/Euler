@@ -260,21 +260,11 @@
 	"buffers":
 	[
 		{
-			"file": "src/Euler/core.clj",
+			"file": "src/Euler/e11.clj",
 			"settings":
 			{
-				"buffer_size": 7136,
+				"buffer_size": 2243,
 				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "nREPL server started on port 60021\nREPL-y 0.1.0-beta10\nClojure 1.5.0-RC1\n    Exit: Control+D or (exit) or (quit)\nCommands: (user/help)\n    Docs: (doc function-name-here)\n          (find-doc \"part-of-name-here\")\n  Source: (source function-name-here)\n          (user/sourcery function-name-here)\n Javadoc: (javadoc java-object-or-class-here)\nExamples from clojuredocs.org: [clojuredocs or cdoc]\n          (user/clojuredocs name-here)\n          (user/clojuredocs \"ns-here\" \"name-here\")\nuser=> (def a [false false true true false true false])\n(def a [false false true true false true false])\n#'user/a\nuser=> a\na\n[false false true true false true false]\nuser=> (def a [true false false false false false false])\n(def a [true false false false false false false])\n#'user/a\nuser=> (def b [true true true false false false false])\n(def b [true true true false false false false])\n#'user/b\nuser=> (defn array-or [a b] \\)\n(defn array-or [a b] \\)\n  #_=> (map #(or %1 %2) a b))\n(map #(or %1 %2) a b))\n#'user/array-or\nuser=> (array-or a b)\n(array-or a b)\n(true true true false false false false)\nuser=> (defn array-of-multiples [n limit]\n  #_=>   (let [lowerBound (Math/pow n 2)]\n  #_=>     (for [i (range 0 (inc limit))]\n  #_=>       (if (or (< i lowerBound)\n  #_=>               (> (Math/pow i 2) limit))\n  #_=>         false\n  #_=>         (zero? (rem i n))))))\n#'user/array-of-multiples\nuser=> (array-of-multiples 2 15)\n(array-of-multiples 2 15)\n(false false false false false false false false false false false false false false false false)\nuser=> (defn array-of-≤multiples [n limit]\n  #_=>   (let [lowerBound (Math/pow n 2)]\n  #_=>     (for [i (range 0 (inc limit))]\n  #_=>       (if (< i lowerBound)\n  #_=>         false\n  #_=>         (zero? (rem i n))))))\n#'user/array-of-≤multiples\nuser=> (defn array-of-multiples [n limit]\n  #_=>   (let [lowerBound (Math/pow n 2)]\n  #_=>     (for [i (range 0 (inc limit))]\n  #_=>       (if (< i lowerBound)\n  #_=>         false\n  #_=>         (zero? (rem i n))))))\n#'user/array-of-multiples\nuser=> (array-of-multiples 2 15)\n(array-of-multiples 2 15)\n(false false false false true false true false true false true false true false true false)\nuser=> (defn array-of-possible-primes [n limit]\n  #_=>   (let [lowerBound (Math/pow n 2)]\n  #_=>     (conat [true true]\n  #_=>       (for [i (range 2 (inc limit))]\n  #_=>         (if (< i lowerBound)\n  #_=>           true\n  #_=>           (not (zero? (rem i n))))))))\nCompilerException java.lang.RuntimeException: Unable to resolve symbol: conat in this context, compiling:(NO_SOURCE_PATH:3:5) \n\nuser=> (defn array-of-possible-primes [n limit]\n  #_=>   (let [lowerBound (Math/pow n 2)]\n  #_=>     (concat [true true]\n  #_=>       (for [i (range 2 (inc limit))]\n  #_=>         (if (< i lowerBound)\n  #_=>           true\n  #_=>           (not (zero? (rem i n))))))))\n#'user/array-of-possible-primes\nuser=> (array-of-multiples 2 15)\n(array-of-multiples 2 15)\n(false false false false true false true false true false true false true false true false)\nuser=> (array-of-possible-primes 2 15)\n(array-of-possible-primes 2 15)\n(true true true true false true false true false true false true false true false true)\nuser=> (array-of-possible-primes 3 15)\n(array-of-possible-primes 3 15)\n(true true true true true true true true true false true true false true true false)\nuser=> (def a (array-of-possible-primes 2 15))\n(def a (array-of-possible-primes 2 15))\n#'user/a\nuser=> (def a (array-of-possible-primes 3 15))\n(def a (array-of-possible-primes 3 15))\n#'user/a\nuser=> (def a (array-of-possible-primes 2 15))\n(def a (array-of-possible-primes 2 15))\n#'user/a\nuser=> (def b (array-of-possible-primes 3 15))\n(def b (array-of-possible-primes 3 15))\n#'user/b\nuser=> (def c (array-of-possible-primes 4 15))\n(def c (array-of-possible-primes 4 15))\n#'user/c\nuser=> (def d (array-of-possible-primes 5 15))\n(def d (array-of-possible-primes 5 15))\n#'user/d\nuser=> (array-or a b c d)\n(array-or a b c d)\nArityException Wrong number of args (4) passed to: user$array-or  clojure.lang.AFn.throwArity (AFn.java:437)\n\nuser=> (defn array-or\n  #_=>   \"Or each pair of items in seqs\"\n  #_=>   [& args]\n  #_=>   (map #(or %1 %2) args))\n#'user/array-or\nuser=> (array-or a b c d)\n(array-or a b c d)\nArityException Wrong number of args (1) passed to: user$array-or$fn  clojure.lang.AFn.throwArity (AFn.java:437)\n\nuser=> (defn array-or\n  #_=>   \"Or each pair of items in seqs a and b\"\n  #_=>   [a b]\n  #_=>   (map #(or %1 %2) a b))\n#'user/array-or\nuser=> (reduce array-or a b c d)\n(reduce array-or a b c d)\nArityException Wrong number of args (5) passed to: core$reduce  clojure.lang.AFn.throwArity (AFn.java:437)\n\nuser=> (reduce array-or a b c d)\n(reduce array-or a b c d)\nArityException Wrong number of args (5) passed to: core$reduce  clojure.lang.AFn.throwArity (AFn.java:437)\n\nuser=> (reduce + 1 2 3 4)\n(reduce + 1 2 3 4)\nArityException Wrong number of args (5) passed to: core$reduce  clojure.lang.AFn.throwArity (AFn.java:437)\n\nuser=> \n\nuser=> (+ 2 3)\n(+ 2 3)\n5\nuser=> (reduce + 1 2 3 4)\n(reduce + 1 2 3 4)\nArityException Wrong number of args (5) passed to: core$reduce  clojure.lang.AFn.throwArity (AFn.java:437)\n\nuser=> )\n)\n#<RuntimeException java.lang.RuntimeException: Unmatched delimiter: )>\n\nuser=> (reduce + 1 2 3 4)\n(reduce + 1 2 3 4)\nRuntimeException Unmatched delimiter: )  clojure.lang.Util.runtimeException (Util.java:219)\nArityException Wrong number of args (5) passed to: core$reduce  clojure.lang.AFn.throwArity (AFn.java:437)\n\nuser=> (apply + 1 2 3 4)\n(apply + 1 2 3 4)\nIllegalArgumentException Don't know how to create ISeq from: java.lang.Long  clojure.lang.RT.seqFrom (RT.java:496)\n\nuser=> (reduce + [1 2 3 4])\n(reduce + [1 2 3 4])\n10\nuser=> (apply array-or a b c d)\n(apply array-or a b c d)\nArityException Wrong number of args (19) passed to: user$array-or  clojure.lang.AFn.throwArity (AFn.java:437)\n\nuser=> (reduce array-or [a b c d])\n(reduce array-or [a b c d])\n(true true true true true true true true true true true true true true true true)\nuser=> a\na\n(true true true true false true false true false true false true false true false true)\nuser=> b\nb\n(true true true true true true true true true false true true false true true false)\nuser=> c\nc\n(true true true true true true true true true true true true true true true true)\nuser=> d\nd\n(true true true true true true true true true true true true true true true true)\nuser=> (defn array-and\n  #_=>   \"And each pair of items in seqs a and b\"\n  #_=>   [a b]\n  #_=>   (map #(and %1 %2) a b))\n#'user/array-and\nuser=> (reduce array-and [a b c d])\n(reduce array-and [a b c d])\n(true true true true false true false true false false false true false true false false)\nuser=> (map vector (iterate inc 0) (reduce array-and [a b c d])\n(map vector (iterate inc 0) (reduce array-and [a b c d])\n  #_=> )\n)\n([0 true] [1 true] [2 true] [3 true] [4 false] [5 true] [6 false] [7 true] [8 false] [9 false] [10 false] [11 true] [12 false] [13 true] [14 false] [15 false])\nuser=> (defn sieve-of-erastothenes [limit]\n  #_=>   (reduce\n  #_=>     array-and\n  #_=>     (for [n (range 2 (inc limit))]\n  #_=>       (array-of-possible-primes n (inc limit)))))\n#'user/sieve-of-erastothenes\nuser=> (sieve-of-erastothenes 15)\n(sieve-of-erastothenes 15)\n(true true true true false true false true false false false true false true false false false)\nuser=> (map vector (iterate inc 0) (sieve-of-erastothenes 15))\n(map vector (iterate inc 0) (sieve-of-erastothenes 15))\n([0 true] [1 true] [2 true] [3 true] [4 false] [5 true] [6 false] [7 true] [8 false] [9 false] [10 false] [11 true] [12 false] [13 true] [14 false] [15 false] [16 false])\nuser=> (defn sieve-of-erastothenes [limit]\n  #_=>   (reduce\n  #_=>     array-and\n  #_=>     (for [n (range 2 limit)]\n  #_=>       (array-of-possible-primes n limit))))\n#'user/sieve-of-erastothenes\nuser=> (defn array-of-possible-primes [n limit]\n  #_=>   (let [lowerBound (Math/pow n 2)]\n  #_=>     (concat [false false]\n  #_=>       (for [i (range 2 (inc limit))]\n  #_=>         (if (< i lowerBound)\n  #_=>           true\n  #_=>           (not (zero? (rem i n))))))))\n#'user/array-of-possible-primes\nuser=> (sieve-of-erastothenes 15)\n(sieve-of-erastothenes 15)\n(false false true true false true false true false false false true false true false false)\nuser=> (defn e10 [limit]\n  #_=>   (filter\n  #_=>     second\n  #_=>     (map-indexed vector (sieve-of-erastothenes limit))))\n#'user/e10\nuser=> (e10 15)\n(e10 15)\n([2 true] [3 true] [5 true] [7 true] [11 true] [13 true])\nuser=> (defn e10 [limit]\n  #_=>   (map first (filter second (map-indexed vector (sieve-of-erastothenes li mit)))))\n#'user/e10\nuser=> (e10 15)\n(e10 15)\n(2 3 5 7 11 13)\nuser=> (defn sieve-of-erastothenes-bools [limit]\n  #_=>   (reduce\n  #_=>     array-and\n  #_=>     (for [n (range 2 limit)]\n  #_=>       (array-of-possible-primes n limit))))\n#'user/sieve-of-erastothenes-bools\nuser=> (defn sieve-of-erastothenes-ints [limit]\n  #_=>   (map first (filter second (map-indexed vector (sieve-of-erastothenes-bo ols limit)))))\n#'user/sieve-of-erastothenes-ints\nuser=> (defn e10 [] (reduce + (sieve-of-erastothenes-ints 10)))\n#'user/e10\nuser=> (e10)\n(e10)\n17\nuser=> (defn e10 [] (reduce + (sieve-of-erastothenes-ints 2000000)))\n#'user/e10\nuser=> (e10)\n(e10)\nStackOverflowError   clojure.core/map/fn--4230 (core.clj:2490)\n\nuser=> (sieve-of-erastothenes-ints 10)\n(sieve-of-erastothenes-ints 10)\n(2 3 5 7)\nuser=> (sieve-of-erastothenes-ints 100)\n(sieve-of-erastothenes-ints 100)\n(2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 53 59 61 67 71 73 79 83 89 97)\nuser=> (sieve-of-erastothenes-ints 10000)\n(sieve-of-erastothenes-ints 10000)\nStackOverflowError   clojure.core/map/fn--4230 (core.clj:2490)\n\nuser=> (sieve-of-erastothenes-bools 10000)\n(sieve-of-erastothenes-bools 10000)\nStackOverflowError   clojure.core/map/fn--4230 (core.clj:2490)\n\nuser=> ",
-			"settings":
-			{
-				"buffer_size": 9845,
-				"line_ending": "Unix",
-				"name": "*REPL* [clojure]",
-				"scratch": true
 			}
 		}
 	],
@@ -454,6 +444,7 @@
 	},
 	"file_history":
 	[
+		"/Users/graham/Documents/Code/github/Euler/src/Euler/core.clj",
 		"/Users/graham/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
 		"/Users/graham/Documents/Code/github/Euler/project.clj",
 		"/Users/graham/Documents/Code/github/three.js/src/cameras/Camera.js",
@@ -503,7 +494,6 @@
 		"/Users/graham/Documents/Code/bitbucket/geospace/geospace.sublime-project",
 		"/Users/graham/Documents/Code/bitbucket/geospace/src/geo/gfx/gfx.clj",
 		"/Users/graham/Documents/Code/github/NinthPlanet/project.clj",
-		"/Users/graham/Documents/Code/github/Euler/src/Euler/core.clj",
 		"/Users/graham/Documents/Code/github/NinthPlanet/src/geo/entity/components/core.clj",
 		"/Users/graham/Documents/Code/github/NinthPlanet/src/geo/entity/component.clj",
 		"/Users/graham/Documents/Code/github/NinthPlanet/src/geo/entity/entity.clj",
@@ -737,18 +727,18 @@
 			[
 				{
 					"buffer": 0,
-					"file": "src/Euler/core.clj",
+					"file": "src/Euler/e11.clj",
 					"settings":
 					{
-						"buffer_size": 7136,
+						"buffer_size": 2243,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6091,
-								6091
+								0,
+								2243
 							]
 						],
 						"settings":
@@ -758,7 +748,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2444.0,
+						"translation.y": 59.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -766,46 +756,8 @@
 			]
 		},
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 1,
-					"settings":
-					{
-						"buffer_size": 9845,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								9845,
-								9845
-							]
-						],
-						"settings":
-						{
-							"auto_complete": true,
-							"auto_indent": false,
-							"detect_indentation": false,
-							"gutter": false,
-							"history_arrows": true,
-							"indent_subsequent_lines": false,
-							"line_numbers": false,
-							"repl": true,
-							"repl_external_id": "clojure",
-							"repl_id": "137ae176c6ae4fa28af8bee4d74e01da",
-							"smart_indent": false,
-							"syntax": "Packages/Clojure/Clojure.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 3254.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				}
 			]
 		}
 	],
