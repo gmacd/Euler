@@ -1,5 +1,20 @@
 (ns Euler.primes)
 
+(defn prime? [n]
+  (cond
+   (<= n 1) false
+   (<= n 3) true
+   (= (mod n 2) 0) false
+   (= (mod n 3) 0) false
+   :else
+   (let [limit (Math/floor (Math/sqrt n))]
+     (loop [pos-factor 5]
+       (cond
+        (>= pos-factor limit) true
+        (= 0 (mod n pos-factor)) false
+        (= 0 (mod n (+ pos-factor 2))) false
+        :else (recur (+ pos-factor 6)))))))
+
 (defn- array-and
   "And each pair of items in seqs a and b"
   [a b]
@@ -36,18 +51,31 @@
 ;  "Return all primes up to limit (lazy)"
 ;  (sieve-of-erastothenes-ints limit))
 
-(defn primes []
+;(defn lazy-primes-other []
+;  "Lazy primes"
+;  (concat
+;   [2 3 5 7]
+;   (lazy-seq
+;    (let [primes-from
+;          (fn primes-from [n [f & r]]
+;            (if (some #(zero? (rem n %))
+;                      (take-while #(<= (* % %) n) primes))
+;              (recur (+ n f) r)
+;              (lazy-seq (cons n (primes-from (+ n f) r)))))
+;          wheel (cycle [2 4 2 4 6 2 6 4 2 4 6 6 2 6  4  2
+;                        6 4 6 8 4 2 4 2 4 8 6 4 6 2  4  6
+;                        2 6 6 4 2 4 6 2 6 4 2 4 2 10 2 10])]
+;      (primes-from 11 wheel)))))
+
+(defn divisible-by? [a divisors]
+  (true? (some #(zero? (mod a %)) divisors)))
+
+(defn lazy-primes1 []
   "Lazy primes"
-  (concat
-   [2 3 5 7]
-   (lazy-seq
-    (let [primes-from
-          (fn primes-from [n [f & r]]
-            (if (some #(zero? (rem n %))
-                      (take-while #(<= (* % %) n) primes))
-              (recur (+ n f) r)
-              (lazy-seq (cons n (primes-from (+ n f) r)))))
-          wheel (cycle [2 4 2 4 6 2 6 4 2 4 6 6 2 6  4  2
-                        6 4 6 8 4 2 4 2 4 8 6 4 6 2  4  6
-                        2 6 6 4 2 4 6 2 6 4 2 4 2 10 2 10])]
-      (primes-from 11 wheel)))))
+  (concat [2 3 5]
+          (for [x (drop 5 (range))
+                :when (and
+                       (odd? x)
+                       (not (zero? (mod x 3)))
+                       (not (zero? (mod x 5)))
+                       (prime? x))] x)))

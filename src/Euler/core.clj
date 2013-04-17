@@ -33,21 +33,6 @@
 (defn factor? [a pos-factor]
   (zero? (rem a pos-factor)))
 
-(defn prime? [n]
-  (cond
-   (<= n 1) false
-   (<= n 3) true
-   (= (mod n 2) 0) false
-   (= (mod n 3) 0) false
-   :else
-   (let [limit (Math/floor (Math/sqrt n))]
-     (loop [pos-factor 5]
-       (cond
-        (>= pos-factor limit) true
-        (= 0 (mod n pos-factor)) false
-        (= 0 (mod n (+ pos-factor 2))) false
-        :else (recur (+ pos-factor 6)))))))
-
 (defn largest-prime-factor [a]
   (loop [pos-factor (int (Math/ceil (Math/sqrt a)))]
     (if (<= pos-factor 1)
