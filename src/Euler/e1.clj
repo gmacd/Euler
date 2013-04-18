@@ -1,4 +1,5 @@
-(ns Euler.e1)
+(ns Euler.e1
+  (:use Euler.core))
 
 (defn e1 [xs limit]
   "Return sum of all multiples of xs between 1 and limit-1"

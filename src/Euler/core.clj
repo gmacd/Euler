@@ -1,4 +1,5 @@
-(ns Euler.core)
+(ns Euler.core
+  (:use [Euler.primes :as primes]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -37,7 +38,7 @@
   (loop [pos-factor (int (Math/ceil (Math/sqrt a)))]
     (if (<= pos-factor 1)
       0
-      (if (and (factor? a pos-factor) (prime? pos-factor))
+      (if (and (factor? a pos-factor) (primes/prime? pos-factor))
         pos-factor
         (recur (dec pos-factor))))))
 
