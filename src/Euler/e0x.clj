@@ -1,4 +1,4 @@
-(ns Euler.e1
+(ns Euler.e0x
   (:use Euler.core))
 
 (defn e1 [xs limit]
