@@ -103,3 +103,7 @@
           (for [n (range 1 (inc (num-digits a)))
                 :let [digit (digit-at a n)]]
       	    digit)))
+
+(defn any-divides [n divisors]
+  "Do any of divisors divide n?"
+  (true? (some #(zero? (mod n %)) divisors)))
