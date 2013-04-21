@@ -47,20 +47,12 @@
 (defn all-binomial-coeffs []
   (for [i (drop 1 (range))] (binomial-coeff i)))
 
-(defn num-digits [a]
-  (count (take-while #(> % 0) (iterate #(int (/ % 10.0)) a))))
-
-(defn digit-at [a digit-idx]
-  (let [num-digits (num-digits a)
-        multiple-of-10 (int (Math/pow 10 (- num-digits digit-idx)))]
-	  (mod (int (/ a multiple-of-10)) 10)))
-
 (defn digits [a]
-  "Lazy seq of digits of a"
-  (if (zero? a)
-    [0]
-    (for [idx (range 1 (+ 1 (num-digits a)))]
-      (digit-at a idx))))
+  "Return seq of digits of integer a as ints"
+  (map #(Character/digit % 10)
+       (seq (if (instance? BigDecimal a)
+              (.toPlainString a)
+              (.toString a)))))
 
 (defn digits-to-number [digits]
   "Convert the separate digits to a single number.  E.g. [1 2 3] -> 123"
@@ -100,13 +92,6 @@
 (defn square-of-sum [limit]
   "Square of sum of numbers from 1 to limit (inclusive)"
   (int (Math/pow (reduce + (range 1 (inc limit))) 2)))
-
-
-(defn split-number [a]
-  (reduce conj []
-          (for [n (range 1 (inc (num-digits a)))
-                :let [digit (digit-at a n)]]
-      	    digit)))
 
 (defn any-divides [n divisors]
   "Do any of divisors divide n?"

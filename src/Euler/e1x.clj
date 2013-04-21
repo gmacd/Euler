@@ -250,5 +250,43 @@
 
 (def sum (apply + nums))
 
-; TODO Get 10 digits! (Or just copy & paste....
+; TODO Get 10 digits! (Or just copy & paste....)
 (defn e13 [] sum)
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; e14
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn max-pred
+  "Returns the greatest of the nums."
+  ([accessor-pred x] x)
+  ([accessor-pred x y] (if (> (accessor-pred x) (accessor-pred y)) x y))
+  ([accessor-pred x y & more]
+     (reduce max-pred (max accessor-pred x y) more)))
+
+
+(defn collatz [n]
+  (if (even? n)
+    (/ n 2)
+    (+ (* 3 n) 1)))
+
+(defn collatz-seq [n]
+  (if (zero? n)
+    nil
+    (concat (take-while #(not= 1 %) (iterate collatz n)) [1])))
+
+(defn e14 []
+  "Return the collatz seq with the most number of terms between 1 1000000"
+  (apply (partial max-key (comp count collatz-seq)) (range 1000000)))
+
+(apply + (map #(Character/digit % 10) (seq (.toPlainString (.pow 2M 1000)))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; e16
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn e16 []
+  (let [n (.pow 2M 1000)]
+    (apply + (digits n))))
