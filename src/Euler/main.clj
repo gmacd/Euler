@@ -1,5 +1,5 @@
 (ns Euler.main
-  (:use [Euler.e40]))
+  (:use [Euler.e1x]))
 
 (defn -main []
-  (prn (e40)))
+  (prn (e12)))

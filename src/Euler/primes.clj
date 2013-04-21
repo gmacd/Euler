@@ -47,35 +47,28 @@
 (defn- sieve-of-erastothenes-ints [limit]
   (map first (filter second (map-indexed vector (sieve-of-erastothenes-bools limit)))))
 
-;(defn all-primes [limit]
-;  "Return all primes up to limit (lazy)"
-;  (sieve-of-erastothenes-ints limit))
-
-;(defn lazy-primes-other []
-;  "Lazy primes"
-;  (concat
-;   [2 3 5 7]
-;   (lazy-seq
-;    (let [primes-from
-;          (fn primes-from [n [f & r]]
-;            (if (some #(zero? (rem n %))
-;                      (take-while #(<= (* % %) n) primes))
-;              (recur (+ n f) r)
-;              (lazy-seq (cons n (primes-from (+ n f) r)))))
-;          wheel (cycle [2 4 2 4 6 2 6 4 2 4 6 6 2 6  4  2
-;                        6 4 6 8 4 2 4 2 4 8 6 4 6 2  4  6
-;                        2 6 6 4 2 4 6 2 6 4 2 4 2 10 2 10])]
-;      (primes-from 11 wheel)))))
+(defn all-primes [limit]
+  "Return all primes up to limit (lazy)"
+  (sieve-of-erastothenes-ints limit))
 
 (defn divisible-by? [a divisors]
   (true? (some #(zero? (mod a %)) divisors)))
 
-(defn lazy-primes1 []
-  "Lazy primes"
-  (concat [2 3 5]
-          (for [x (drop 5 (range))
-                :when (and
-                       (odd? x)
-                       (not (zero? (mod x 3)))
-                       (not (zero? (mod x 5)))
-                       (prime? x))] x)))
+; primes cannot be written efficiently as a function, because
+; it needs to look back on the whole sequence. contrast with
+; fibs and powers-of-2 which only need a fixed buffer of 1 or 2
+; previous values.
+(def primes
+  (concat 
+   [2 3 5 7]
+   (lazy-seq
+    (let [primes-from
+	  (fn primes-from [n [f & r]]
+	    (if (some #(zero? (rem n %))
+		      (take-while #(<= (* % %) n) primes))
+	      (recur (+ n f) r)
+	      (lazy-seq (cons n (primes-from (+ n f) r)))))
+	  wheel (cycle [2 4 2 4 6 2 6 4 2 4 6 6 2 6  4  2
+			6 4 6 8 4 2 4 2 4 8 6 4 6 2  4  6
+			2 6 6 4 2 4 6 2 6 4 2 4 2 10 2 10])]
+      (primes-from 11 wheel)))))

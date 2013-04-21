@@ -15,13 +15,13 @@
   (for [[idx elt] (indexed coll) :when (pred elt)] idx))
 
 
-(defn num-digits [a]
-  (count (take-while #(> % 0) (iterate #(int (/ % 10.0)) a))))
+;(defn num-digits [a]
+;  (count (take-while #(> % 0) (iterate #(int (/ % 10.0)) a))))
 
-(defn digit-at [a digit-idx]
-  (let [num-digits (num-digits a)
-        multiple-of-10 (int (Math/pow 10 (- num-digits digit-idx)))]
-	  (mod (int (/ a multiple-of-10)) 10)))
+;(defn digit-at [a digit-idx]
+;  (let [num-digits (num-digits a)
+;        multiple-of-10 (int (Math/pow 10 (- num-digits digit-idx)))]
+;	  (mod (int (/ a multiple-of-10)) 10)))
 
 
 (defn fac [n] (apply * (range 1 (inc n))))

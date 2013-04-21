@@ -42,6 +42,10 @@
         pos-factor
         (recur (dec pos-factor))))))
 
+(defn binomial-coeff [n] (/ (* n (+ n 1)) 2))
+
+(defn all-binomial-coeffs []
+  (for [i (drop 1 (range))] (binomial-coeff i)))
 
 (defn num-digits [a]
   (count (take-while #(> % 0) (iterate #(int (/ % 10.0)) a))))
