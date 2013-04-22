@@ -283,6 +283,26 @@
 
 (apply + (map #(Character/digit % 10) (seq (.toPlainString (.pow 2M 1000)))))
 
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; e15
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defrecord Node [id connected-ids])
+
+(defn build-lattice [w h]
+  (letfn [(idx [x y] (+ (* w y) x))
+          (connected-ids [x y] (concat
+                                (if (< x (dec w)) [(+ (idx x y) 1)])
+                                (if (< y (dec h)) [(+ (idx x y) w)])))]
+    (for [y (range h)
+          x (range w)]
+      (->Node (idx x y) (connected-ids x y)))))
+
+(defn e15 []
+  (build-lattice 3 3))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; e16
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

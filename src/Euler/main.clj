@@ -2,4 +2,4 @@
   (:use [Euler.e1x]))
 
 (defn -main []
-  (prn (e16)))
+  (prn (e15)))
